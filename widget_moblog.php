@@ -3,7 +3,7 @@
 Plugin Name: Moblog
 Plugin URI: http://www.vjcatkick.com/?page_id=5775
 Description: Twitter based moblog on your sidebar.
-Version: 0.1.0
+Version: 0.1.1
 Author: V.J.Catkick
 Author URI: http://www.vjcatkick.com/
 */
@@ -41,6 +41,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 - Initial release
 * Jan 08 2009 - v0.1.0
 - public release
+* Jan 12 2009 - v0.1.1
+- bug fix
 */
 
 
@@ -99,6 +101,10 @@ function widget_moblog_init() {
 						$filedata = substr( $filedata, $spos );
 						$spos = strpos( $filedata, '"' );
 						$filedata = substr( $filedata, 0, $spos );
+
+						// 0.1.1 fixed
+						if( strpos( $filedata, "/" ) == 0 ) $filedata = 'http://twitpic.com' . $filedata;
+
 						return( $filedata );
 					} /* if */
 				} /* if */

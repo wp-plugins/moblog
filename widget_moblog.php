@@ -43,6 +43,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 - public release
 * Jan 12 2009 - v0.1.1
 - bug fix
+* Jan 24 2009 - v0.1.2
+- bug fix - positioning
 */
 
 
@@ -181,8 +183,9 @@ function widget_moblog_init() {
 
 		$c_retv = "";
 
-		$c_retv .= '<div id="moblog_image_outer" style="position:relative; width:' . $moblog_width . 'px; height:' . $moblog_width . ' background-color:black;" >';
-		$c_retv .= '<img src="' . get_option('siteurl') . '/wp-content/plugins/moblog/images/imageback_transparent.gif'. '" border="0" width="' . $moblog_width . 'px" height="' . $moblog_width . 'px" />';
+// fixed 0.1.2
+//		$c_retv .= '<div id="moblog_image_outer" style="position:relative; width:' . $moblog_width . 'px; height:' . $moblog_width . ' background-color:black;" >';
+//		$c_retv .= '<img src="' . get_option('siteurl') . '/wp-content/plugins/moblog/images/imageback_transparent.gif'. '" border="0" width="' . $moblog_width . 'px" height="' . $moblog_width . 'px" />';
 
 
 		$isVertical = false;
@@ -215,7 +218,7 @@ function widget_moblog_init() {
 			$img_display_height = $moblog_width;
 
 			if( $widget_moblog_use_frame  && $img_info ) {
-				$theOffset = 15;
+				$theOffset = 0; //15;	// fixed 0.1.2
 				$offset_top = 0;
 				$offset_left = 0;
 
@@ -249,6 +252,7 @@ function widget_moblog_init() {
 
 				$offset_v_text = $moblog_width + 2;
 			}else{	// no frame, just display image
+
 				$c_retv .= '<img src="' . $retv . '" width="' . $moblog_width . 'px" border="0" style="margin-bottom:4px; border:1px solid #DDD;position: absolute; left:0; top: 0;" >';
 				$img_info = getimagesize( $retv );
 				$offset_v_text = floor( ( $moblog_width * $img_height ) / $img_width ) + 2;
@@ -259,12 +263,14 @@ function widget_moblog_init() {
 				$c_retv .= '</a>';
 			} /* if */
 
+		// fixed 0.1.2
+		$c_retv = '<img src="' . get_option('siteurl') . '/wp-content/plugins/moblog/images/imageback_transparent.gif'. '" border="0" width="' . $moblog_width . 'px" height="' . $offset_v_text . 'px" />' . $c_retv;
+		$c_retv = '<div id="moblog_image_outer" style="position:relative; width:' . $moblog_width . 'px; height:' . $offset_v_text . ' background-color:black;" >'  . $c_retv;
+
 			// text below image
 			if( $widget_moblog_enable_text ) {
-//				$c_retv .= '<div class="mbody" style="position:absolute; left:0px; top:' . $offset_v_text . 'px;" width="' . $moblog_width . 'px" >' . $theText . '</div>';
 				$c_retv .= '<div class="mbody" style="margin-top:4px;" width="' . $moblog_width . 'px" >' . $theText . '</div>';
 			}else{
-//				$c_retv .= '<div class="mbody" style="margin-top:4px;" width="' . $moblog_width . 'px" >' . $theText . '</div>';
 				$c_retv .= '<div class="mbody" style="margin-top:4px;" width="' . $moblog_width . 'px" >' . '' . '</div>';
 			} /* if else */
 

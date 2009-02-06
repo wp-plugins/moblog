@@ -3,7 +3,7 @@
 Plugin Name: Moblog
 Plugin URI: http://www.vjcatkick.com/?page_id=5775
 Description: Twitter based moblog on your sidebar.
-Version: 0.1.1
+Version: 0.1.2
 Author: V.J.Catkick
 Author URI: http://www.vjcatkick.com/
 */
